@@ -20,7 +20,7 @@ public class CustomersDao {
 	private final String GET_CUSTOMER_BY_ID_QUERY = "SELECT * FROM customers WHERE customer_id = ?";
 	private final String CREATE_NEW_CUSTOMER_QUERY = "INSERT INTO customers(full_name, address, phone, email) values (?, ?, ?, ?)";
 	private final String UPDATE_CUSTOMER_QUERY = "UPDATE customer SET full_name = ?, address = ?, phone = ?, email = ? WHERE customer_id = ?";
-	private final String DELETE_CUSTOMER_BY_ID_QUERY = "DELETE FROM customers WHERE id = ?";
+	private final String DELETE_CUSTOMER_BY_ID_QUERY = "DELETE FROM customers WHERE customer_id = ?";
 	
 	public CustomersDao() {
 		connection = DBConnection.getConnection();

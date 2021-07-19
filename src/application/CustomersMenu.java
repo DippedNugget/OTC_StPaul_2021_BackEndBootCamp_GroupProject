@@ -15,7 +15,7 @@ import entity.Customers;
 
 public class CustomersMenu {
 
-	private CustomersDao customersDao;
+	private CustomersDao customersDao = new CustomersDao();
 	private Scanner scanner = new Scanner(System.in);
 	private List<String> options = Arrays.asList(
 			"Show Customers", 
@@ -49,8 +49,7 @@ public class CustomersMenu {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
-			
+			}	
 			
 			System.out.println("Press ENTER to continue...");
 			scanner.nextLine();
@@ -67,7 +66,11 @@ public class CustomersMenu {
 	private void getCustomers() throws SQLException {
 		List<Customers> customers = customersDao.getCustomers();
 		for (Customers customer : customers) {
-			System.out.println(customer.getCustomer_id() + ": " + customer.getFull_name());
+			System.out.println(customer.getCustomer_id() + 
+					" - Full Name: " + customer.getFull_name() + 
+					" - Address: " + customer.getAddress() + 
+					" - Phone Number: " + customer.getPhone() +
+					" - Email: " + customer.getEmail());
 		}
 	}
 	
@@ -75,14 +78,18 @@ public class CustomersMenu {
 		System.out.print("Enter Customer ID: ");
 		int customer_id = Integer.parseInt(scanner.nextLine());
 		Customers customer = customersDao.getSingleCustomer(customer_id);
-		System.out.println(customer.getCustomer_id() + ": " + customer.getFull_name());
+		System.out.println(customer.getCustomer_id() + 
+				" - Full Name: " + customer.getFull_name() + 
+				" - Address: " + customer.getAddress() + 
+				" - Phone Number: " + customer.getPhone() +
+				" - Email: " + customer.getEmail());
 	}
 
 	private void addCustomer() throws SQLException {
 		System.out.print("Enter New Customer information: ");
 		System.out.print("\nEnter Customer's Full Name: ");
 		String full_name = scanner.nextLine();
-		System.out.println("Enter Customer's Address: ");
+		System.out.print("Enter Customer's Address: ");
 		String address = scanner.nextLine();
 		System.out.print("Enter Customer's Phone: ");
 		String phone = scanner.nextLine();
