@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-		//Enter Customer Menu Variable Here
+		CustomersMenu customersMenu = new CustomersMenu();
 		//Enter Product Menu Variable Here
 		SalesMenu salesMenu = new SalesMenu();
 		private Scanner scanner = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class MainMenu {
 				
 				try {
 					if (selection.equals("1")) {
-						//Enter Customer Menu Command here
+						customersMenu.startCustomersMenu();
 					} else if (selection.equals("2")) {
 						//Enter Product Menu Command Here
 					} else if (selection.equals("3")) {
