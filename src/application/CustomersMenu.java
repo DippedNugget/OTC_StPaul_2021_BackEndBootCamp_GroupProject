@@ -51,8 +51,6 @@ public class CustomersMenu {
 				e.printStackTrace();
 			}	
 			
-			System.out.println("Press ENTER to continue...");
-			scanner.nextLine();
 		} while(!selection.equals("6"));
 	}
 	
