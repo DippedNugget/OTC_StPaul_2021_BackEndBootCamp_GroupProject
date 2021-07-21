@@ -38,15 +38,14 @@ public class SalesDao {
 		return sales;
 	}
 	
-	public List<Sales> getSingleSale() throws SQLException {
-		ResultSet rs = connection.prepareStatement(GET_A_SINGLE_SALE_QUERY).executeQuery();
-		List<Sales> sales = new ArrayList<Sales>();
-		
-		while (rs.next()) {
-			sales.add(populateSale(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5)));
+	public Sales getSingleSale(int sale_id) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(GET_A_SINGLE_SALE_QUERY);
+		ps.setInt(1, sale_id);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		return populateSale(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5));
 		}
-		return sales;
-	}
+		
 	
 	public void addSale(int quantity, double price, int product_id, int customer_id) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(ADD_SALE_BY_QUERY);
