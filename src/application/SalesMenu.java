@@ -96,6 +96,7 @@ public class SalesMenu {
 				System.out.print("Enter Customers ID:");
 				int customer_id = Integer.parseInt(scanner.nextLine());
 				salesDao.addSale(quantity, price, product_id, customer_id);
+				break;
 			} catch (SQLException e) {
 					System.out.println("\nThe Customer or Product ID Is Not Accurate, Please Verify and Retry");
 					break;

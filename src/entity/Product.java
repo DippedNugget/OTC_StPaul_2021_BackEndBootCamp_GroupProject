@@ -1,5 +1,9 @@
 package entity;
 
+//Product Entity
+//OTC_StPaul_2021_BackEndBootCamp_Group_Project
+//Created by Andrew Cham
+
 public class Product {
     private int product_id;
     private String theme;
@@ -7,7 +11,7 @@ public class Product {
     private int piece_count;
     private int quantity;
 
-    public Products (int product_id, String theme, String set_name, int piece_count, int quantity) {
+    public Product (int product_id, String theme, String set_name, int piece_count, int quantity) {
         this.setProduct_id(product_id);
         this.setTheme(theme);
         this.setSet_name(set_name);
@@ -46,4 +50,4 @@ public class Product {
     }
   }
 
-}
+

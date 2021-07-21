@@ -1,5 +1,9 @@
 package dao;
 
+//Product Dao
+//OTC_StPaul_2021_BackEndBootCamp_Group_Project
+//Created by Andrew Cham
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,23 +11,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.Products;
+import entity.Product;
 
-public class ProductsDao {
-  private Connection connection;
+public class ProductDao {
+  
+	private Connection connection;
     private final String GET_PRODUCTS_QUERY = "SELECT * FROM  products";
     private final String GET_A_PRODUCT_BY_ID_QUERY = "SELECT * FROM proucts WHERE product_id = ?";
-    private final String CREATE_NEW_PRODUCT_QUERY = "INSERT INTO products(theme, name, piece_count, quantity) VALUES (?, ?, ?, ?)";
-    private final String UPDATE_PRODUCT_QUERY = "UPDATE products SET theme = ?, name = ?, piece_count = ?, quantity = ?";
+    private final String CREATE_NEW_PRODUCT_QUERY = "INSERT INTO products(theme, set_name, piece_count, quantity) VALUES (?, ?, ?, ?)";
+    private final String UPDATE_PRODUCT_QUERY = "UPDATE products SET theme = ?, set_name = ?, piece_count = ?, quantity = ?";
     private final String DELETE_PRODUCT_BY_ID_QUERY = "DELETE FROM products WHERE product_id = ?";
 
 
-    public ProductsDao {
-        connection = DBConnection.getConnetion();
+    public ProductDao() {
+        connection = DBConnection.getConnection();
     }
-    public List<Products> getProducts() throws SQLException {
+    public List<Product> getProducts() throws SQLException {
         ResultSet rs = connection.prepareStatement(GET_PRODUCTS_QUERY).executeQuery();
-        List<Products> products = new ArrayList<Products>();
+        List<Product> products = new ArrayList<Product>();
 
         while(rs.next()) {
             products.add(populateProducts(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
@@ -31,7 +36,7 @@ public class ProductsDao {
         return products;
     }
 
-    public Products getAProduct(int product_id) throws SQLException {
+    public Product getAProduct(int product_id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(GET_A_PRODUCT_BY_ID_QUERY);
         ps.setInt(1, product_id);
         ResultSet rs = ps.executeQuery();
@@ -39,20 +44,20 @@ public class ProductsDao {
         return populateProducts(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5));
     }
 
-    public void addProduct(String theme, String name, int piece_count, int quantity) throws SQLException {
+    public void addProduct(String theme, String set_name, int piece_count, int quantity) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(CREATE_NEW_PRODUCT_QUERY);
         ps.setString(1, theme);
-        ps.setString(2, name);
+        ps.setString(2, set_name);
         ps.setInt(3, piece_count);
         ps.setInt(4, quantity);
         ps.executeUpdate();
     }
     
-    public void updateProduct(int product_id, String theme, String name, int piece_count, int quantity) throws SQLException {
+    public void updateProduct(int product_id, String theme, String set_name, int piece_count, int quantity) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(UPDATE_PRODUCT_QUERY);
         ps.setInt(1, product_id);
         ps.setString(2, theme);
-        ps.setString(3, name);
+        ps.setString(3, set_name);
         ps.setInt(4, piece_count);
         ps.setInt(5, quantity);
         ps.executeUpdate();
@@ -63,8 +68,8 @@ public class ProductsDao {
         ps.executeUpdate();
     }
 
-    private Products populateProducts(int product_id, String theme, String name, int piece_count, int quantity) throws SQLException {
-        return new Products(product_id, theme, name, piece_count, quantity);
+    private Product populateProducts(int product_id, String theme, String set_name, int piece_count, int quantity) throws SQLException {
+        return new Product(product_id, theme, set_name, piece_count, quantity);
     }
 
 

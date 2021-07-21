@@ -12,8 +12,8 @@ public class DBConnection {
 
 	// Saved log in variables
 	private final static String URL = "jdbc:mysql://localhost:3306/Lego_Store";
-	private final static String USERNAME = "root"; // remember to change back or need to use a preference connection
-	private final static String PASSWORD = "W4lexander"; //remember to change back or need to use a preference connection
+	private final static String USERNAME = "db_username"; // remember to change back or need to use a preference connection
+	private final static String PASSWORD = "db_password"; //remember to change back or need to use a preference connection
 	
 	// Saved connection variables
 	private static Connection connection;

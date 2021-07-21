@@ -1,5 +1,8 @@
 package application;
 
+//Product Menu
+//OTC_StPaul_2021_BackEndBootCamp_Group_Project
+//Created by Andrew Cham
 
 
 import java.sql.SQLException;
@@ -7,11 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.ProductsDao;
-import entity.Products;
+import dao.ProductDao;
+import entity.Product;
+
 
 public class ProductMenu {
-  private ProductsDao productsDao = new ProductsDao();
+	private ProductDao productDao = new ProductDao();
     private Scanner scanner = new Scanner(System.in);
     private List<String> options = Arrays.asList(
         "Display Products",
@@ -21,7 +25,7 @@ public class ProductMenu {
         "Delete a Product",
         "Return to Main Menu");
 
-    public void startProductsMenu() {
+    public void startProductMenu() {
         String selection = "";
 
         do {
@@ -40,13 +44,11 @@ public class ProductMenu {
                 } else if (selection.equals("5")) {
                     deleteAProduct();
                 } else if (selection.equals("6")) {
-                    System.out.println("Thank you for using for using Product");
+                    System.out.println("Thank you for using the Product Interface System");
                 }
             } catch (SQLException e) {
                 scanner.nextLine();
             }
-            System.out.println("Press Enter to continue...");
-            scanner.nextLine();
         } while (!selection.equals("6"));
     }
 
@@ -58,8 +60,8 @@ public class ProductMenu {
     }
 
     private  void getProducts() throws SQLException {
-        List<Products> products = productsDao.getProducts();
-        for(Products product : products) {
+        List<Product> products = productDao.getProducts();
+        for(Product product : products) {
             System.out.println(product.getProduct_id() +
             "-Theme: " + product.getTheme() +
             "-Name: " + product.getSet_name() +
@@ -69,8 +71,8 @@ public class ProductMenu {
     }
 
     private void getAProduct() throws SQLException {
-        List<Products> products = productsDao.getProducts();
-        for(Products product : products) {
+        List<Product> products = productDao.getProducts();
+        for(Product product : products) {
             System.out.println(product.getProduct_id() +
             "-Theme: " + product.getTheme() +
             "-Name: " + product.getSet_name() +
@@ -83,12 +85,12 @@ public class ProductMenu {
         System.out.print("Enter Product Theme: ");
         String theme = scanner.nextLine();
         System.out.print("Enter Product Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter Product Count: ");
+        String set_name = scanner.nextLine();
+        System.out.print("Enter Piece Count: ");
         int piece_count = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter Product Quantity: ");
         int quantity = Integer.parseInt(scanner.nextLine());
-        productsDao.addProduct(theme, name, piece_count, quantity);
+        productDao.addProduct(theme, set_name, piece_count, quantity);
     }
 
     private void updateProduct() throws SQLException {
@@ -97,18 +99,18 @@ public class ProductMenu {
         System.out.println("Enter Product Theme: ");
         String theme = scanner.nextLine();
         System.out.println("Enter product Name: ");
-        String name = scanner.nextLine();
+        String set_name = scanner.nextLine();
         System.out.println("Enter Product Piece Count: ");
         int piece_count = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter Product Quantity: ");
         int quantity = Integer.parseInt(scanner.nextLine());
-        productsDao.updateProduct(product_id, theme, name, piece_count, quantity);
+        productDao.updateProduct(product_id, theme, set_name, piece_count, quantity);
     }
 
     private void deleteAProduct() throws SQLException {
         System.out.println("Enter Product Id to delete: ");
         int product_id = Integer.parseInt(scanner.nextLine());
-        productsDao.deleteProduct(product_id);
+        productDao.deleteProduct(product_id);
         
     }
 

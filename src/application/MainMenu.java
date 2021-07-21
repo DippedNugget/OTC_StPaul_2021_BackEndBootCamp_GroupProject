@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-		CustomersMenu customersMenu = new CustomersMenu();
-		//Enter Product Menu Variable Here
+		CustomersMenu customersMenu = new CustomersMenu();  
+		ProductMenu productMenu = new ProductMenu();
 		SalesMenu salesMenu = new SalesMenu();
 		private Scanner scanner = new Scanner(System.in);
 		private List<String> options = Arrays.asList(
@@ -32,7 +32,7 @@ public class MainMenu {
 					if (selection.equals("1")) {
 						customersMenu.startCustomersMenu();
 					} else if (selection.equals("2")) {
-						//Enter Product Menu Command Here
+						productMenu.startProductMenu();
 					} else if (selection.equals("3")) {
 						salesMenu.startSalesMenu();
 					} else if (selection.equals("4")) {
