@@ -85,44 +85,92 @@ public class SalesMenu {
 	}
 	
 	private void addSale() throws SQLException {
-		System.out.print("Enter Quantity of units sold:");
-		int quantity = Integer.parseInt(scanner.nextLine());
-		System.out.print("Enter the Price per unit:");
-		double price = Integer.parseInt(scanner.nextLine());
-		System.out.print("Enter the Product Id Sold:");
-		int product_id = Integer.parseInt(scanner.nextLine());
-		System.out.print("Enter Customers ID:");
-		int customer_id = Integer.parseInt(scanner.nextLine());
-		salesDao.addSale(quantity, price, product_id, customer_id);
+		while (true) {
+			try {
+				System.out.print("Enter Quantity of units sold:");
+				int quantity = Integer.parseInt(scanner.nextLine());
+				System.out.print("Enter the Price per unit:");
+				double price = Double.parseDouble(scanner.nextLine());
+				System.out.print("Enter the Product Id Sold:");
+				int product_id = Integer.parseInt(scanner.nextLine());
+				System.out.print("Enter Customers ID:");
+				int customer_id = Integer.parseInt(scanner.nextLine());
+				salesDao.addSale(quantity, price, product_id, customer_id);
+			} catch (SQLException e) {
+					System.out.println("\nThe Customer or Product ID Is Not Accurate, Please Verify and Retry");
+					break;
+			}
+		}
 	}
 	
 	private void removeSale() throws SQLException {
+		int sale_id;
 		System.out.print("Enter Sale ID to be removed:");
-		int sale_id = Integer.parseInt(scanner.nextLine());
-		salesDao.removeSale(sale_id);
+		while (true) {
+			try {
+				sale_id = Integer.parseInt(scanner.nextLine());
+				salesDao.removeSale(sale_id);
+				break;
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter a Valid Sale Id");
+				break;
+			}
+		}
 	}
 	
 	private void updateQuantity() throws SQLException {
+		int sale_id = 0;
+		int quantity = 0;
 		System.out.print("Enter the Sale ID to update the Quantity: ");
-		int sale_id = Integer.parseInt(scanner.nextLine());
-		System.out.print("Enter New Quantity sold: ");
-		int quantity = Integer.parseInt(scanner.nextLine());
-		salesDao.updateQuantity(quantity, sale_id);
-	}
-
+		while (true) {
+			try {
+				sale_id = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter a Valid Sale Id");
+				break;
+			}	
+				System.out.print("Enter New Quantity sold: ");
+				quantity = Integer.parseInt(scanner.nextLine());
+				salesDao.updateQuantity(quantity, sale_id);
+			}
+		}
+		
 	private void updatePrice() throws SQLException {
+		int sale_id = 0;
+		double price;
 		System.out.print("Enter the Sale ID to update the Quantity: ");
-		int sale_id = Integer.parseInt(scanner.nextLine());
-		System.out.print("Enter New Price per unit: ");
-		double price = Integer.parseInt(scanner.nextLine());
-		salesDao.updatePrice(price, sale_id);
-	}
+		while (true) {
+			try {
+				sale_id = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter a Valid Sale Id");
+				break;
+			}	 	
+				System.out.print("Enter New Price per unit: ");
+				price = Double.parseDouble(scanner.nextLine());
+				salesDao.updatePrice(price, sale_id);
+			}
+		}
 	
 	private void updateProduct() throws SQLException {
+		int sale_id = 0;
+		int product_id = 0;
 		System.out.print("Enter the Sale ID to update the Quantity: ");
-		int sale_id = Integer.parseInt(scanner.nextLine());
-		System.out.print("Enter New Product ID for units sold: ");
-		int product_id = Integer.parseInt(scanner.nextLine());
-		salesDao.updatePrice(product_id, sale_id);
-	}
+		while (true) {
+			try {
+				sale_id = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter a Valid Sale Id");
+				break;
+			}			
+				System.out.print("Enter New Product ID for units sold: ");
+				try {
+					product_id = Integer.parseInt(scanner.nextLine());
+					salesDao.updatePrice(product_id, sale_id);
+				} catch (SQLException e) {
+					System.out.println("Product ID Does Not Exist, Please Verify and Try Again");
+					break;
+				}
+	 		}
+		}
 }
