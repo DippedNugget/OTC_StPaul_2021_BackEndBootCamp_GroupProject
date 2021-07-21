@@ -108,9 +108,17 @@ public class ProductMenu {
     }
 
     private void deleteAProduct() throws SQLException {
-        System.out.println("Enter Product Id to delete: ");
-        int product_id = Integer.parseInt(scanner.nextLine());
-        productDao.deleteProduct(product_id);
+        int product_id = 0;
+    	System.out.println("Enter Product Id to delete: ");
+    	while (true) {
+    		try {
+    			product_id = Integer.parseInt(scanner.nextLine());
+    			productDao.deleteProduct(product_id);
+    			break;
+    		} catch (NumberFormatException e) {
+    			System.out.println("Must enter valid product id");
+    		}
+    	}
         
     }
 
