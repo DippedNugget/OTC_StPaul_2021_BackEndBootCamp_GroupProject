@@ -101,7 +101,7 @@ public class CustomersMenu {
 		int customer_id = Integer.parseInt(scanner.nextLine());
 		System.out.print("Update the Customer's Full Name: ");
 		String full_name = scanner.nextLine();
-		System.out.println("Update the Customer's Address: ");
+		System.out.print("Update the Customer's Address: ");
 		String address = scanner.nextLine();
 		System.out.print("Update the Customer's Phone: ");
 		String phone = scanner.nextLine();
@@ -111,9 +111,18 @@ public class CustomersMenu {
 	}
 	
 	private void removeCustomer() throws SQLException {
+		int customer_id;
 		System.out.print("Enter Customer ID to be removed: ");
-		int customer_id = Integer.parseInt(scanner.nextLine());
-			customersDao.removeCustomer(customer_id);
+		while (true) {
+			try {
+				customer_id = Integer.parseInt(scanner.nextLine());
+				customersDao.removeCustomer(customer_id);
+				break;
+			} catch (NumberFormatException e) {
+				System.out.println("\n Must Enter a Valid Customer Id");
+				break;
+			}
+		}
 	}
 }
 	
