@@ -73,16 +73,32 @@ public class CustomersMenu {
 	}
 	
 	private void getSingleCustomer() throws SQLException {
-		System.out.print("Enter Customer ID: ");
-		int customer_id = Integer.parseInt(scanner.nextLine());
-		Customers customer = customersDao.getSingleCustomer(customer_id);
-		System.out.println(customer.getCustomer_id() + 
-				" - Full Name: " + customer.getFull_name() + 
-				" - Address: " + customer.getAddress() + 
-				" - Phone Number: " + customer.getPhone() +
-				" - Email: " + customer.getEmail());
-	}
+		int customer_id = 0;
+		System.out.print("Enter Customer ID to see customer: ");
+		while (true) {
+			try {
+				customer_id = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter a Valid Customer Id");
+				break;
+			}
+				try {
+					Customers customer = customersDao.getSingleCustomer(customer_id);
+					System.out.println(customer.getCustomer_id() + 
+							" - Full Name: " + customer.getFull_name() + 
+							" - Address: " + customer.getAddress() + 
+							" - Phone Number: " + customer.getPhone() +
+							" - Email: " + customer.getEmail());
+						break;
+					
+				} catch (SQLException e) {
+				System.out.println("\nInvalid Customer Id, please review and try again");
+				break;
 
+			}
+		}
+	}
+	
 	private void addCustomer() throws SQLException {
 		System.out.print("Enter New Customer information: ");
 		System.out.print("\nEnter Customer's Full Name: ");
@@ -97,18 +113,38 @@ public class CustomersMenu {
 		}
 	
 	private void updateCustomer() throws SQLException {
-		System.out.print("Enter the Customer ID you want to Update: ");
-		int customer_id = Integer.parseInt(scanner.nextLine());
-		System.out.print("Update the Customer's Full Name: ");
-		String full_name = scanner.nextLine();
-		System.out.print("Update the Customer's Address: ");
-		String address = scanner.nextLine();
-		System.out.print("Update the Customer's Phone: ");
-		String phone = scanner.nextLine();
-		System.out.print("Update the Customer's Email: ");
-		String email = scanner.nextLine();
-		customersDao.updateCustomer(full_name, address, phone, email, customer_id);
-	}
+		int customer_id = 0;
+		String full_name;
+		String address;
+		String phone;
+		String email;
+		System.out.print("Enter Customer ID to Update: ");
+		while (true) {
+			try {
+				customer_id = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter Valid Customer Id");
+				break;
+			}
+					try {
+						System.out.print("Update the Customer's Full Name: ");
+						full_name = scanner.nextLine();
+						System.out.print("Update the Customer's Address: ");
+						address = scanner.nextLine();
+						System.out.print("Update the Customer's Phone: ");
+						phone = scanner.nextLine();
+						System.out.print("Update the Customer's Email: ");
+						email = scanner.nextLine();
+						customersDao.updateCustomer(full_name, address, phone, email, customer_id);
+							break;
+					
+					} catch (SQLException e) {
+						System.out.println("\nOne or more entries is invalid, please review and try again");
+							break;
+					}
+		}
+}
+
 	
 	private void removeCustomer() throws SQLException {
 		int customer_id;
