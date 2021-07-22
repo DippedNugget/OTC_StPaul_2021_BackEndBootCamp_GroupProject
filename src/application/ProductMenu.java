@@ -71,13 +71,27 @@ public class ProductMenu {
     }
 
     private void getAProduct() throws SQLException {
-        List<Product> products = productDao.getProducts();
-        for(Product product : products) {
-            System.out.println(product.getProduct_id() +
-            "-Theme: " + product.getTheme() +
-            "-Name: " + product.getSet_name() +
-            "-Piece Count: " + product.getPiece_count() +
-            "-Quantity: " + product.getQuantity());
+        int product_id = 0;
+        System.out.println("Enter Product ID to see Product: ");
+        while (true) {
+            try {
+                product_id = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("\n Must Enter a Valid Product ID");
+                break;
+            }
+            try {
+                Product product = productDao.getAProduct(product_id);
+                System.out.println(product.getProduct_id() + 
+                		"-Theme: " + product.getTheme() + 
+                		"-Name: " + product.getSet_name() + 
+                		"-Piece Count: " + product.getPiece_count() + 
+                		"-Quantity: " + product.getQuantity());
+                break;
+            } catch (SQLException e) {
+                System.out.println("\n Invalid Product ID, please review and try again");
+                break;
+            }
         }
     }
 
@@ -119,7 +133,6 @@ public class ProductMenu {
     			System.out.println("Must enter valid product id");
     		}
     	}
-        
-    }
 
+    }
 }

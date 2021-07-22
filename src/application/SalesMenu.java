@@ -75,15 +75,27 @@ public class SalesMenu {
 	}
 	
 	private void getSingleSale() throws SQLException {
-		List<Sales> sales = salesDao.getSales();
-		for (Sales sale : sales) {
+		int sale_id = 0;
+		System.out.print("Enter Sale Id to Find");
+		while (true) {
+			try {
+				sale_id = Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("The Sale Id Enter is Invalid");
+			break;
+		} try {
+			Sales sale = salesDao.getSingleSale(sale_id);
 			System.out.println(sale.getSale_id() + " - Quantity: " + sale.getQuantity() + 
 					" - Price Per Unit: " + sale.getPrice() + 
 					" - Product by ID: " + sale.getProduct_id() + 
-					" - Customer by ID: " + sale.getCustomer_id());
+					" - Customer by ID: " + sale.getSale_id());
+				break;
+		} catch (SQLException e) {
+			System.out.println("One or more entries did not populate");
+			break;
 		}
 	}
-	
+}	
 	private void addSale() throws SQLException {
 		while (true) {
 			try {
