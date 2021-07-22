@@ -108,24 +108,49 @@ public class ProductMenu {
     }
 
     private void updateProduct() throws SQLException {
-        System.out.println("Enter Product Id to Update: ");
-        int product_id = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter Product Theme: ");
-        String theme = scanner.nextLine();
-        System.out.println("Enter product Name: ");
-        String set_name = scanner.nextLine();
-        System.out.println("Enter Product Piece Count: ");
-        int piece_count = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter Product Quantity: ");
-        int quantity = Integer.parseInt(scanner.nextLine());
-        productDao.updateProduct(product_id, theme, set_name, piece_count, quantity);
-    }
-
+    	int product_id = 0;
+		String theme;
+		String set_name;
+		int piece_count = 0;
+		int quantity = 0;
+		System.out.print("Enter Product ID to Update: ");
+		while (true) {
+			try {
+				product_id = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("\nMust Enter Valid Product Id");
+				break;
+			}
+					try {
+						System.out.println("Enter Product Theme: ");
+				        theme = scanner.nextLine();
+				        System.out.println("Enter product Name: ");
+				        set_name = scanner.nextLine();
+				        System.out.println("Enter Product Piece Count: ");
+				        piece_count = Integer.parseInt(scanner.nextLine());
+				        System.out.println("Enter Product Quantity: ");
+				        quantity = Integer.parseInt(scanner.nextLine());
+				        productDao.updateProduct(product_id, theme, set_name, piece_count, quantity);
+							break;
+					
+					} catch (SQLException e) {
+						System.out.println("\nOne or more entries is invalid, please review and try again");
+							break;
+					}
+		}
+}
+    	
     private void deleteAProduct() throws SQLException {
-        System.out.println("Enter Product Id to delete: ");
-        int product_id = Integer.parseInt(scanner.nextLine());
-        productDao.deleteProduct(product_id);
-        
+        int product_id = 0;
+    	System.out.println("Enter Product Id to delete: ");
+    	while (true) {
+    		try {
+    			product_id = Integer.parseInt(scanner.nextLine());
+    			productDao.deleteProduct(product_id);
+    			break;
+    		} catch (NumberFormatException e) {
+    			System.out.println("Must enter valid product id");
+    		}
+    	}
     }
-
 }
