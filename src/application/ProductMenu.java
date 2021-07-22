@@ -122,15 +122,15 @@ public class ProductMenu {
 				break;
 			}
 					try {
-						System.out.println("Enter Product Theme: ");
+						System.out.println("Update Product Theme: ");
 				        theme = scanner.nextLine();
-				        System.out.println("Enter product Name: ");
+				        System.out.println("Update product Name: ");
 				        set_name = scanner.nextLine();
-				        System.out.println("Enter Product Piece Count: ");
+				        System.out.println("Update Product Piece Count: ");
 				        piece_count = Integer.parseInt(scanner.nextLine());
-				        System.out.println("Enter Product Quantity: ");
+				        System.out.println("Update Product Quantity: ");
 				        quantity = Integer.parseInt(scanner.nextLine());
-				        productDao.updateProduct(product_id, theme, set_name, piece_count, quantity);
+				        productDao.updateProduct(theme, set_name, piece_count, quantity, product_id);
 							break;
 					
 					} catch (SQLException e) {
