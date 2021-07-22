@@ -55,11 +55,10 @@ public class ProductDao {
     
     public void updateProduct(int product_id, String theme, String set_name, int piece_count, int quantity) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(UPDATE_PRODUCT_QUERY);
-        ps.setInt(1, product_id);
-        ps.setString(2, theme);
-        ps.setString(3, set_name);
-        ps.setInt(4, piece_count);
-        ps.setInt(5, quantity);
+        ps.setString(1, theme);
+        ps.setString(2, set_name);
+        ps.setInt(3, piece_count);
+        ps.setInt(4, quantity);
         ps.executeUpdate();
     }
     public void deleteProduct(int product_id) throws SQLException {
