@@ -17,7 +17,7 @@ public class ProductDao {
   
 	private Connection connection;
     private final String GET_PRODUCTS_QUERY = "SELECT * FROM  products";
-    private final String GET_A_PRODUCT_BY_ID_QUERY = "SELECT * FROM proucts WHERE product_id = ?";
+    private final String GET_A_PRODUCT_BY_ID_QUERY = "SELECT * FROM products WHERE product_id = ?";
     private final String CREATE_NEW_PRODUCT_QUERY = "INSERT INTO products(theme, set_name, piece_count, quantity) VALUES (?, ?, ?, ?)";
     private final String UPDATE_PRODUCT_QUERY = "UPDATE products SET theme = ?, set_name = ?, piece_count = ?, quantity = ?";
     private final String DELETE_PRODUCT_BY_ID_QUERY = "DELETE FROM products WHERE product_id = ?";
