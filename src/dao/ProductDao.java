@@ -19,7 +19,7 @@ public class ProductDao {
     private final String GET_PRODUCTS_QUERY = "SELECT * FROM  products";
     private final String GET_A_PRODUCT_BY_ID_QUERY = "SELECT * FROM products WHERE product_id = ?";
     private final String CREATE_NEW_PRODUCT_QUERY = "INSERT INTO products(theme, set_name, piece_count, quantity) VALUES (?, ?, ?, ?)";
-    private final String UPDATE_PRODUCT_QUERY = "UPDATE products SET theme = ?, set_name = ?, piece_count = ?, quantity = ?";
+    private final String UPDATE_PRODUCT_QUERY = "UPDATE products SET theme = ?, set_name = ?, piece_count = ?, quantity = ? WHERE product_id = ?";
     private final String DELETE_PRODUCT_BY_ID_QUERY = "DELETE FROM products WHERE product_id = ?";
 
 
@@ -53,12 +53,13 @@ public class ProductDao {
         ps.executeUpdate();
     }
     
-    public void updateProduct(int product_id, String theme, String set_name, int piece_count, int quantity) throws SQLException {
+    public void updateProduct(String theme, String set_name, int piece_count, int quantity, int product_id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(UPDATE_PRODUCT_QUERY);
         ps.setString(1, theme);
         ps.setString(2, set_name);
         ps.setInt(3, piece_count);
         ps.setInt(4, quantity);
+        ps.setInt(5, product_id);
         ps.executeUpdate();
     }
     public void deleteProduct(int product_id) throws SQLException {
